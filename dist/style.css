@@ -1,0 +1,151 @@
+/* *CSS RESET */
+/* ********** */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/** GLOBAL **/
+/* ********** */
+button {
+  display: inline-block;
+}
+.w5 {
+  width: 5%;
+}
+.w30 {
+  width: 30%;
+}
+.w15 {
+  width: 15%;
+}
+
+/** NAV **/
+/* ********** */
+
+.title-container {
+  padding: 0.5em;
+}
+
+/** PROJECT **/
+/* ********** */
+#add-project-btn {
+  margin-bottom: 1em;
+}
+#delete-project-btn {
+  margin-top: 1em;
+}
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  border: 1px solid hsl(48, 100%, 67%);
+}
+.project-item:hover {
+  cursor: pointer;
+  background-color: rgba(255, 221, 87, 0.336);
+}
+.active-project {
+  background-color: hsl(48, 100%, 67%);
+}
+
+/** TASK **/
+/* ********** */
+.task-list {
+  margin-top: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.task-header {
+}
+.task-item,
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+.task-item:nth-of-type(odd) {
+  background-color: hsl(49, 91%, 91%) !important;
+}
