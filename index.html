@@ -123,6 +123,51 @@
         </div>
       </div>
     </div>
+
+    <!-- new task modal -->
+    <div class="modal">
+      <div class="modal-background "></div>
+      <div class="modal-content">
+        <div class="box">
+          <h2 class="title is-3">New Task</h2>
+          <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+              <input id="new-task-title" class="input" type="text" placeholder="Title">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+              <textarea id="new-task-description" class="textarea" placeholder="Description"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Priority</label>
+            <div class="control">
+              <span class="select">
+                <select name="priority" id="new-task-priority">
+                  <option selected value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Due Date</label>
+            <div class="control">
+              <input id="new-task-due-date" class="input" type="date" placeholder="Priority">
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="button is-warning">Submit</div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
