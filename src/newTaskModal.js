@@ -2,10 +2,6 @@ const modalFunction = function () {
   // * cache DOM
   const newTaskBtn = document.getElementById("add-task-btn");
   const newTaskModal = document.getElementById("new-task-modal");
-  const newTaskModalBackground = document.getElementById(
-    "new-task-modal-background"
-  );
-  const newTaskModalClose = document.getElementById("close-new-task-modal");
   const taskBlock = document.querySelector(".task-list");
 
   // * bind events
@@ -24,7 +20,9 @@ const modalFunction = function () {
       event.target.classList.contains("modal-background") ||
       event.target.classList.contains("modal-close")
     ) {
-      toggleNewTaskModal();
+      if ((event.target.parentNode.id = "new-task-modal")) {
+        toggleNewTaskModal();
+      }
     }
   }
 };

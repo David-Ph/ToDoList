@@ -16,17 +16,39 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ \"./src/modal.js\");\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modal__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\n// * execute function\r\n(0,_modal__WEBPACK_IMPORTED_MODULE_0__.modalFunction)();\r\nconsole.log(_modal__WEBPACK_IMPORTED_MODULE_0__.modalFunction);\r\n\n\n//# sourceURL=webpack://09_todolist/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _newTaskModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newTaskModal */ \"./src/newTaskModal.js\");\n/* harmony import */ var _newTaskModal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_newTaskModal__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n\r\n\r\n\r\n// * execute function\r\n(0,_newTaskModal__WEBPACK_IMPORTED_MODULE_0__.modalFunction)();\r\n\r\nlet newProject = new _project__WEBPACK_IMPORTED_MODULE_1__.Project(\"First new project\");\r\nlet newTask = {\r\n  title: \"New Task\",\r\n  description: \"New Description\",\r\n  dueDate: \"New DueDate\",\r\n  priority: \"New Priority\",\r\n};\r\nlet newerTask = {\r\n  title: \"Newer Task\",\r\n  description: \"Newer Description\",\r\n  dueDate: \"Newer DueDate\",\r\n  priority: \"Newer Priority\",\r\n};\r\n\r\nnewProject.addTask(newTask);\r\nnewProject.addTask(newerTask);\r\nconsole.log(newProject);\r\n\n\n//# sourceURL=webpack://09_todolist/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/modal.js":
-/*!**********************!*\
-  !*** ./src/modal.js ***!
-  \**********************/
+/***/ "./src/newTaskModal.js":
+/*!*****************************!*\
+  !*** ./src/newTaskModal.js ***!
+  \*****************************/
 /***/ ((module) => {
 
-eval("const modalFunction = function () {\r\n  // * cache DOM\r\n  const newTaskBtn = document.getElementById(\"add-task-btn\");\r\n  const newTaskModal = document.getElementById(\"new-task-modal\");\r\n  const newTaskModalBackground = document.getElementById(\r\n    \"new-task-modal-background\"\r\n  );\r\n  const newTaskModalClose = document.getElementById(\"close-new-task-modal\");\r\n  const taskBlock = document.querySelector(\".task-list\");\r\n\r\n  // * bind events\r\n  newTaskBtn.addEventListener(\"click\", toggleNewTaskModal);\r\n  newTaskModal.addEventListener(\"click\", closeModal);\r\n  //   taskBlock.addEventListener(\"click\");\r\n\r\n  function toggleNewTaskModal() {\r\n    if (newTaskModal.classList.contains(\"is-active\")) {\r\n      newTaskModal.classList.remove(\"is-active\");\r\n    } else {\r\n      newTaskModal.classList.add(\"is-active\");\r\n    }\r\n  }\r\n  function closeModal(event) {\r\n    if (\r\n      event.target.classList.contains(\"modal-background\") ||\r\n      event.target.classList.contains(\"modal-close\")\r\n    ) {\r\n      toggleNewTaskModal();\r\n    }\r\n  }\r\n\r\n  return {\r\n    closeModal,\r\n    toggleNewTaskModal,\r\n  };\r\n};\r\n\r\nmodule.exports = {\r\n  modalFunction,\r\n};\r\n\n\n//# sourceURL=webpack://09_todolist/./src/modal.js?");
+eval("const modalFunction = function () {\r\n  // * cache DOM\r\n  const newTaskBtn = document.getElementById(\"add-task-btn\");\r\n  const newTaskModal = document.getElementById(\"new-task-modal\");\r\n  const taskBlock = document.querySelector(\".task-list\");\r\n\r\n  // * bind events\r\n  newTaskBtn.addEventListener(\"click\", toggleNewTaskModal);\r\n  newTaskModal.addEventListener(\"click\", closeModal);\r\n\r\n  function toggleNewTaskModal() {\r\n    if (newTaskModal.classList.contains(\"is-active\")) {\r\n      newTaskModal.classList.remove(\"is-active\");\r\n    } else {\r\n      newTaskModal.classList.add(\"is-active\");\r\n    }\r\n  }\r\n  function closeModal(event) {\r\n    if (\r\n      event.target.classList.contains(\"modal-background\") ||\r\n      event.target.classList.contains(\"modal-close\")\r\n    ) {\r\n      if ((event.target.parentNode.id = \"new-task-modal\")) {\r\n        toggleNewTaskModal();\r\n      }\r\n    }\r\n  }\r\n};\r\n\r\nmodule.exports = {\r\n  modalFunction,\r\n};\r\n\n\n//# sourceURL=webpack://09_todolist/./src/newTaskModal.js?");
+
+/***/ }),
+
+/***/ "./src/project.js":
+/*!************************!*\
+  !*** ./src/project.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"PROJECTS\": () => (/* binding */ PROJECTS),\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\n/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./task */ \"./src/task.js\");\n\r\n\r\nlet PROJECTS = [];\r\n\r\nclass Project {\r\n  constructor(projectName) {\r\n    this.projectName = projectName;\r\n    this.task = [];\r\n  }\r\n\r\n  addTask(task) {\r\n    let newProject = new _task__WEBPACK_IMPORTED_MODULE_0__.Task(\r\n      task.title,\r\n      task.description,\r\n      task.priority,\r\n      task.dueDate\r\n    );\r\n    this.task.push(newProject);\r\n  }\r\n\r\n  printProject() {\r\n    console.log(this.projectName);\r\n    console.log(this.task);\r\n  }\r\n}\r\n\r\n\r\n\n\n//# sourceURL=webpack://09_todolist/./src/project.js?");
+
+/***/ }),
+
+/***/ "./src/task.js":
+/*!*********************!*\
+  !*** ./src/task.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task)\n/* harmony export */ });\nclass Task {\r\n  constructor(title, description, priority, dueDate) {\r\n    this.title = title;\r\n    this.description = description;\r\n    this.priority = priority;\r\n    this.dueDate = dueDate;\r\n    this.hasDone = false;\r\n  }\r\n}\r\n\r\n// module.exports = Task;\r\n\n\n//# sourceURL=webpack://09_todolist/./src/task.js?");
 
 /***/ })
 
