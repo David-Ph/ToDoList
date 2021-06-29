@@ -28,6 +28,6 @@ newerProject.addTask(newerTask);
 PROJECTS.push(newProject);
 PROJECTS.push(newerProject);
 
-PROJECTS.forEach((project) => {
-  project.printProject();
-});
+// PROJECTS.forEach((project) => {
+//   project.printProject();
+// });
