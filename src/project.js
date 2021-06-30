@@ -10,6 +10,10 @@ class Project {
     this.task = [];
   }
 
+  addNewProject() {
+    PROJECTS.push(this);
+  }
+
   addTask(task) {
     let newProject = new Task(
       uniqid(),
@@ -26,12 +30,17 @@ class Project {
       return task.taskId !== taskID;
     });
   }
-
-  printProject() {
-    console.log(this.projectName);
-    console.log(this.projectId);
-    console.log(this.task);
-  }
 }
 
-export { PROJECTS, Project };
+const projectFunction = (() => {
+  function initializePROJECTS() {
+    const firstProject = new Project("First Project");
+    PROJECTS.push(firstProject);
+  }
+
+  return {
+    initializePROJECTS,
+  };
+})();
+
+export { PROJECTS, Project, projectFunction };
