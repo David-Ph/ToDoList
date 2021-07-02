@@ -5,9 +5,11 @@ import { PROJECTS, Project, projectFunction } from "./project";
 const newProjectInput = document.getElementById("new-project-input");
 const addProjectBtn = document.getElementById("add-project-btn");
 const projectBlock = document.getElementById("project-block");
+const deleteProjectBtn = document.getElementById("delete-project-btn");
 
 // * bind events
 addProjectBtn.addEventListener("click", onAddNewProject);
+deleteProjectBtn.addEventListener("click", onDeleteProject);
 projectBlock.addEventListener("click", onProjectClick);
 
 //? PROJECT DOM FUNCTION
@@ -51,6 +53,11 @@ function onProjectClick(event) {
 function switchProject(event) {
   let projectId = event.target.querySelector(".project-id");
   projectFunction.switchProject(projectId.value);
+}
+
+function onDeleteProject() {
+  projectFunction.deleteActiveProject();
+  renderAllProject();
 }
 
 // *testing stuff

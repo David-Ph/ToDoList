@@ -58,11 +58,22 @@ const projectFunction = (() => {
     });
   }
 
+  function deleteActiveProject() {
+    PROJECTS.forEach((project, index) => {
+      if (project.isActive) {
+        PROJECTS.splice(index, 1);
+      }
+    });
+    // set the first project to be active next
+    PROJECTS[0].isActive = true;
+  }
+
   return {
     initializePROJECTS,
     clearActiveProject,
     switchProject,
     addNewProject,
+    deleteActiveProject,
   };
 })();
 
