@@ -1,11 +1,12 @@
 import { modalFunction } from "./newTaskModal";
-import { PROJECTS, Project, projectFunction } from "./project";
+import { projectFunction } from "./project";
 
 // * cache DOM
 const newProjectInput = document.getElementById("new-project-input");
 const addProjectBtn = document.getElementById("add-project-btn");
 const projectBlock = document.getElementById("project-block");
 const deleteProjectBtn = document.getElementById("delete-project-btn");
+const taskBlock = document.querySelector("task-block");
 
 // * bind events
 addProjectBtn.addEventListener("click", onAddNewProject);
@@ -27,7 +28,7 @@ function resetNewProjectInput() {
 
 function renderAllProject() {
   projectBlock.innerHTML = "";
-  let allProjects = PROJECTS;
+  let allProjects = projectFunction.getAllProjects();
   allProjects.forEach((project) => {
     let newProjectRow = document.createElement("article");
     newProjectRow.classList.add("project-item");
@@ -47,12 +48,36 @@ function onProjectClick(event) {
     projectFunction.clearActiveProject();
     switchProject(event);
     renderAllProject();
+    renderActiveProjectTask();
   }
 }
 
 function switchProject(event) {
   let projectId = event.target.querySelector(".project-id");
   projectFunction.switchProject(projectId.value);
+}
+
+function renderActiveProjectTask() {
+  taskBlock.innerHTML = "";
+  let activeProject = projectFunction.getActiveProject();
+  activeProject.task.forEach((task) => {
+    let newTaskRow = document.createElement("article");
+    newTaskRow.className = "task-item has-background-warning-light";
+    newTaskRow.innerHTML = `
+      <input type="hidden" class="task-id" value="${task.taskId}">
+      <div class="w30 task-title">${task.title}</div>
+      <div class="w30 task-description">
+        ${task.description}
+      </div>
+      <div class="w15 task-priority">${task.priority}</div>
+      <div class="w15 task-dueDate">${task.dueDate}</div>
+      <div class="buttons are-small">
+        <button class="button is-success task-edit">Edit</button>
+        <button class="button is-danger task-delete">X</button>
+      </div>
+    `;
+    taskBlock.appendChild(newTaskRow);
+  });
 }
 
 function onDeleteProject() {
