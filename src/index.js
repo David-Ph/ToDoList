@@ -13,12 +13,8 @@ projectBlock.addEventListener("click", onProjectClick);
 //? PROJECT DOM FUNCTION
 function onAddNewProject() {
   let newProjectName = newProjectInput.value;
-  if (newProjectName === "") {
-    return;
-  }
-  let newProject = new Project(newProjectName);
 
-  newProject.addNewProject();
+  projectFunction.addNewProject(newProjectName);
   renderAllProject();
   resetNewProjectInput();
 }
@@ -31,21 +27,32 @@ function renderAllProject() {
   projectBlock.innerHTML = "";
   let allProjects = PROJECTS;
   allProjects.forEach((project) => {
-    let newProjectRow = `
-      <article class="project-item active-project">
+    let newProjectRow = document.createElement("article");
+    newProjectRow.classList.add("project-item");
+    if (project.isActive === true) {
+      newProjectRow.classList.add("active-project");
+    }
+    newProjectRow.innerHTML = `
         <input type="hidden" class="project-id" value="${project.projectId}">
         <h2 class="title is-6">${project.projectName}</h2>
-      </article>
     `;
-    projectBlock.insertAdjacentHTML("beforeend", newProjectRow);
+    projectBlock.appendChild(newProjectRow);
   });
 }
 
 function onProjectClick(event) {
   if (event.target.classList.contains("project-item")) {
-    console.log("Clicking on project item!");
+    projectFunction.clearActiveProject();
+    switchProject(event);
+    renderAllProject();
   }
 }
+
+function switchProject(event) {
+  let projectId = event.target.querySelector(".project-id");
+  projectFunction.switchProject(projectId.value);
+}
+
 // *testing stuff
 
 // let newProject = new Project("First new project");

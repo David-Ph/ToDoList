@@ -8,10 +8,7 @@ class Project {
     this.projectId = uniqid();
     this.projectName = projectName;
     this.task = [];
-  }
-
-  addNewProject() {
-    PROJECTS.push(this);
+    this.isActive = false;
   }
 
   addTask(task) {
@@ -33,13 +30,39 @@ class Project {
 }
 
 const projectFunction = (() => {
+  function addNewProject(projectName) {
+    if (projectName === "") {
+      return;
+    }
+    const newProject = new Project(projectName);
+    PROJECTS.push(newProject);
+  }
+
   function initializePROJECTS() {
     const firstProject = new Project("First Project");
+    firstProject.isActive = true;
     PROJECTS.push(firstProject);
+  }
+
+  function clearActiveProject() {
+    PROJECTS.forEach((project) => {
+      project.isActive = false;
+    });
+  }
+
+  function switchProject(projectId) {
+    PROJECTS.forEach((project) => {
+      if (project.projectId === projectId) {
+        project.isActive = true;
+      }
+    });
   }
 
   return {
     initializePROJECTS,
+    clearActiveProject,
+    switchProject,
+    addNewProject,
   };
 })();
 
