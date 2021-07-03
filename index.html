@@ -66,25 +66,14 @@
               <div class="w30 task-description">
                 Description
               </div>
-              <div class="w15 task-priority">Prioty</div>
+              <div class="w15 task-priority">Priority</div>
               <div class="w15 task-dueDate">Due Date</div>
               <div class="w5 task-edit"></div>
               <div class="w5 task-delete"></div>
             </article>
           </div>
           <div class="task-block">
-            <!-- <article class="task-item has-background-warning-light">
-              <div class="w30 task-title">Build Website</div>
-              <div class="w30 task-description">
-                Build with HTML, CSS, Javascript, and NodeJS
-              </div>
-              <div class="w15 task-priority">High</div>
-              <div class="w15 task-dueDate">26/06/2021</div>
-              <div class="buttons are-small">
-                <button class="button is-success task-edit">Edit</button>
-                <button class="button is-danger task-delete">X</button>
-              </div>
-            </article> -->
+
           </div>
           </div>
         </div>
@@ -114,9 +103,9 @@
             <div class="control">
               <span class="select">
                 <select name="priority" id="new-task-priority">
-                  <option selected value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
+                  <option selected value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
                 </select>
               </span>
             </div>
@@ -128,11 +117,55 @@
             </div>
           </div>
           <div class="buttons">
-            <div class="button is-warning">Submit</div>
+            <div id="submit-new-project-btn" class="button is-warning">Submit</div>
           </div>
         </div>
       </div>
       <button id="close-new-task-modal" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <!-- EDIT TASK MODAL -->
+    <div id="edit-task-modal" class="modal">
+      <div id="edit-task-modal-background" class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box">
+          <h2 class="title is-3">Edit Task</h2>
+          <div class="field">
+            <label class="label">Edit Title</label>
+            <div class="control">
+              <input id="edit-task-title" class="input" type="text" placeholder="Title">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Edit Description</label>
+            <div class="control">
+              <textarea id="edit-task-description" class="textarea" placeholder="Description"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Edit Priority</label>
+            <div class="control">
+              <span class="select">
+                <select name="priority" id="edit-task-priority">
+                  <option selected value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Edit Due Date</label>
+            <div class="control">
+              <input id="edit-task-due-date" class="input" type="date" placeholder="Priority">
+            </div>
+          </div>
+          <div class="buttons">
+            <div id="submit-edit-project-btn" class="button is-warning">Submit</div>
+          </div>
+        </div>
+      </div>
+      <button id="close-edit-task-modal" class="modal-close is-large" aria-label="close"></button>
     </div>
 
     <script src="main.js"></script>
