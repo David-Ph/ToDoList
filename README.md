@@ -1,0 +1,1 @@
+This is a project to practice Object and Class constructors in Javascript.
