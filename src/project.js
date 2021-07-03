@@ -27,19 +27,32 @@ class Project {
       return task.taskId !== taskID;
     });
   }
+
+  editTask(taskId, newTask) {
+    this.task.forEach((task) => {
+      if (task.taskId === taskId) {
+        task.title = newTask.title;
+        task.description = newTask.description;
+        task.priority = newTask.priority;
+        task.dueDate = newTask.dueDate;
+      }
+    });
+  }
 }
 
 const projectFunction = (() => {
   function getAllProjects() {
-    return PROJECTS;
+    return [...PROJECTS];
   }
 
   function getActiveProject() {
+    let activeProject;
     PROJECTS.forEach((project) => {
       if (project.isActive) {
-        return project;
+        activeProject = project;
       }
     });
+    return activeProject;
   }
 
   function addNewProject(projectName) {

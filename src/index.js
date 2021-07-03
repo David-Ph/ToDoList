@@ -1,4 +1,4 @@
-import { modalFunction } from "./newTaskModal";
+import { modalFunction, modalMethods } from "./newTaskModal";
 import { projectFunction } from "./project";
 
 // * cache DOM
@@ -6,12 +6,33 @@ const newProjectInput = document.getElementById("new-project-input");
 const addProjectBtn = document.getElementById("add-project-btn");
 const projectBlock = document.getElementById("project-block");
 const deleteProjectBtn = document.getElementById("delete-project-btn");
-const taskBlock = document.querySelector("task-block");
+const taskBlock = document.querySelector(".task-block");
+
+const submitNewProject = document.getElementById("submit-new-project-btn");
+const newTaskTitle = document.getElementById("new-task-title");
+const newTaskDescription = document.getElementById("new-task-description");
+const newTaskPriority = document.getElementById("new-task-priority");
+const newTaskDueDate = document.getElementById("new-task-due-date");
+
+const submitEditBtn = document.getElementById("submit-edit-project-btn");
+const editTaskTitle = document.getElementById("edit-task-title");
+const editTaskDescription = document.getElementById("edit-task-description");
+const editTaskPriority = document.getElementById("edit-task-priority");
+const editTaskDueDate = document.getElementById("edit-task-due-date");
 
 // * bind events
 addProjectBtn.addEventListener("click", onAddNewProject);
 deleteProjectBtn.addEventListener("click", onDeleteProject);
 projectBlock.addEventListener("click", onProjectClick);
+
+submitNewProject.addEventListener("click", onSubmitNewTask);
+taskBlock.addEventListener("click", onDeleteTask);
+
+taskBlock.addEventListener("click", onEditTask);
+submitEditBtn.addEventListener("click", onSubmitEditTask);
+
+// * global variable
+let taskToEditId;
 
 //? PROJECT DOM FUNCTION
 function onAddNewProject() {
@@ -85,31 +106,83 @@ function onDeleteProject() {
   renderAllProject();
 }
 
-// *testing stuff
+function onSubmitNewTask() {
+  addTaskToActiveProject();
+  modalMethods.clearAllModalInputs();
+  modalMethods.closeAllModal();
+  renderActiveProjectTask();
+}
 
-// let newProject = new Project("First new project");
-// let newerProject = new Project("Second new project");
-// let newTask = {
-//   title: "New Task",
-//   description: "New Description",
-//   dueDate: "New DueDate",
-//   priority: "New Priority",
-// };
-// let newerTask = {
-//   title: "Newer Task",
-//   description: "Newer Description",
-//   dueDate: "Newer DueDate",
-//   priority: "Newer Priority",
-// };
+function addTaskToActiveProject() {
+  const newTask = {
+    title: newTaskTitle.value,
+    description: newTaskDescription.value,
+    priority: newTaskPriority.value,
+    dueDate: newTaskDueDate.value,
+  };
+  const activeProject = projectFunction.getActiveProject();
+  activeProject.addTask(newTask);
+}
 
-// newProject.addTask(newTask);
-// newProject.addTask(newerTask);
-// newerProject.addTask(newTask);
-// newerProject.addTask(newerTask);
-// PROJECTS.push(newProject);
-// PROJECTS.push(newerProject);
+function onDeleteTask(event) {
+  if (event.target.classList.contains("task-delete")) {
+    deleteTask(event.target);
+    renderActiveProjectTask();
+  }
+}
+
+function deleteTask(event) {
+  const taskToDeleteId =
+    event.parentNode.parentNode.querySelector(".task-id").value;
+
+  const activeProject = projectFunction.getActiveProject();
+  activeProject.deleteTask(taskToDeleteId);
+}
+
+function onEditTask(event) {
+  if (event.target.classList.contains("task-edit")) {
+    modalFunction.toggleEditTaskModal();
+    fillEditTaskModal(event.target);
+  }
+}
+
+function fillEditTaskModal(event) {
+  taskToEditId = event.parentNode.parentNode.querySelector(".task-id").value;
+  const taskToEditTitle =
+    event.parentNode.parentNode.querySelector(".task-title").innerHTML;
+  const taskToEditDescription =
+    event.parentNode.parentNode.querySelector(".task-description").innerHTML;
+  const taskToEditPriority =
+    event.parentNode.parentNode.querySelector(".task-priority").innerHTML;
+  const taskToEditDueDate =
+    event.parentNode.parentNode.querySelector(".task-dueDate").innerHTML;
+
+  editTaskTitle.value = taskToEditTitle;
+  editTaskDescription.value = taskToEditDescription;
+  editTaskPriority.value = taskToEditPriority;
+  editTaskDueDate.value = taskToEditDueDate;
+}
+
+function onSubmitEditTask() {
+  editTask();
+  modalMethods.closeAllModal();
+  renderActiveProjectTask();
+}
+
+function editTask() {
+  const activeProject = projectFunction.getActiveProject();
+
+  const editedTask = {
+    title: editTaskTitle.value,
+    description: editTaskDescription.value,
+    priority: editTaskPriority.value,
+    dueDate: editTaskDueDate.value,
+  };
+
+  activeProject.editTask(taskToEditId, editedTask);
+}
 
 // * execute function
-modalFunction();
+// modalFunction();
 projectFunction.initializePROJECTS();
 renderAllProject();
